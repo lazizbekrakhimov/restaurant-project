@@ -33,7 +33,8 @@ const MealCard = ({ meal, featured = false }: MealCardProps) => {
         <span className={`font-black text-black ${featured ? "text-2xl" : "text-lg"}`}>
           ${meal.price.toFixed(2)}
         </span>
-        <button className=" w-11 h-11 flex items-center justify-center bg-black text-white rounded-lg transition-all duration-200 hover:scale-110 hover:shadow-lg hover:bg-gray-800 active:scale-95 cursor-pointer ">
+        <button className="group relative w-11 h-11 flex items-center justify-center bg-black text-white rounded-lg transition-all duration-200 hover:scale-110 hover:shadow-lg active:scale-95 cursor-pointer overflow-hidden">
+          <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-linear-to-r from-transparent via-white/20 to-transparent" />
           <CartIcon />
         </button>
       </div>

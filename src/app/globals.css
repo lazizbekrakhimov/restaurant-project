@@ -1,21 +1,15 @@
 @import "tailwindcss";
 
-body {
-    background-image: url('/images/bbgg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
-}
+
 
 .containers {
-    max-width: 1282px;
-    width: 100%;
-    margin: 40px auto;
+  max-width: 1282px;
+  width: 100%;
+  margin: 40px auto;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 ::selection {

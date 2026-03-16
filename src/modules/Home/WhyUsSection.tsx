@@ -115,7 +115,6 @@ const WhyUsSection = () => {
                         </div>
                     ))}
                 </div>
-
             </div>
         </section>
     )

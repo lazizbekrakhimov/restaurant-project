@@ -15,3 +15,13 @@ export interface NewsItem {
         avatar: string;
     };
 }
+
+export interface RegisterForm {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
+    agreed: boolean;
+}
