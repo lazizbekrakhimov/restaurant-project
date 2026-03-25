@@ -76,7 +76,7 @@ const PopularMeals = () => {
         <Image src="/images/leaf.png" alt="" fill className="object-contain" />
       </div>
 
-      <h2 className="text-center text-4xl font-black text-black mb-12">
+      <h2 className="text-center font-black text-black mb-16" style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1 }}>
         Популярные блюда
       </h2>
 

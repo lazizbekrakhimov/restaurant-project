@@ -10,5 +10,12 @@ import SubmitButton from "./SubminButton";
 import GalleryCard from "./GalleryCard";
 import Pagination from "./Pagination";
 import PageLoader from "./PageLoader";
+import WorkTimes from "./WorkTimes";
+import CustomBooking from "./CustomBooking";
+import { CustomDatePicker } from "./CustomDatePicker";
+import { CustomTimePicker } from "./CustomDatePicker";
+import Contact from "./Contact";
+import WherePath from "./WherePath";
+import WriteToUs from "./WriteToUs";
 
-export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader }
+export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader, WorkTimes, CustomBooking, CustomDatePicker, CustomTimePicker, Contact, WherePath, WriteToUs }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HeroHeader, Leaf } from '@/components'
+import { HeroHeader, Leaf, WherePath } from '@/components'
 import MealCard from "@/components/MealCard";
 import { Meal } from "@/@types";
 import Link from "next/link";
@@ -36,19 +36,7 @@ const MenuSection = () => {
 
           <div className="px-12 pt-6 pb-24">
 
-            <p className="text-sm text-black/50 font-medium mb-10 tracking-wide">
-              <Link href="/" className="hover:text-red-600 transition-colors duration-200" >
-                Главная
-              </Link>
-              <span className="mx-2 text-black/40">›</span>
-              <Link href="/menu" className="text-black/80 hover:text-black transition-colors duration-200" >
-                Меню
-              </Link>
-            </p>
-
-            <h1 className="text-center font-black text-black mb-10" style={{ fontSize: "48px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1, }} >
-              Меню
-            </h1>
+            <WherePath pageName="Меню" pageHref="/menu" title="Меню" />
 
             <div className="flex justify-center mb-35">
               <div className="inline-flex items-center rounded-full px-2 py-2 gap-1" style={{ background: "rgba(255,255,255,0.45)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 4px 24px rgba(0,0,0,0.07)", }} >

@@ -1,7 +1,7 @@
 "use client";
 
-import { CustomSelect, Leaf, SubmitButton } from "@/components";
-import { BookingIcon, CalendarIcon, ClockIcon, Field } from "@/icons";
+import { CustomDatePicker, CustomSelect, CustomTimePicker, Leaf, SubmitButton } from "@/components";
+import { BookingIcon, Field } from "@/icons";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -23,7 +23,7 @@ const locationOptions = [
 const BookingSection = () => {
   const [phone, setPhone] = useState("");
   const [guests, setGuests] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
 
@@ -35,7 +35,6 @@ const BookingSection = () => {
   return (
     <section className="relative overflow-hidden">
       <Leaf style={{ top: "100px", right: "660px", width: 220, height: 240, transform: "rotate(-80deg)" }} />
-
       <Leaf style={{ bottom: "60px", right: "630px", width: 230, height: 250, transform: "rotate(160deg)" }} />
 
       <div className="containers flex items-center gap-16">
@@ -57,18 +56,16 @@ const BookingSection = () => {
                 <CustomSelect options={guestOptions} placeholder="На сколько человек?" value={guests} onChange={setGuests} />
               </Field>
               <Field>
-                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent text-sm outline-none cursor-pointer" style={{ colorScheme: "light", color: date ? "#000" : "rgba(0,0,0,0.4)" }} />
-                <CalendarIcon />
+                <CustomDatePicker value={date} onChange={setDate} />
               </Field>
               <Field>
-                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} className="w-full bg-transparent text-sm outline-none cursor-pointer" style={{ colorScheme: "light", color: time ? "#000" : "rgba(0,0,0,0.4)" }} />
-                <ClockIcon />
+                <CustomTimePicker value={time} onChange={setTime} />
               </Field>
               <Field>
                 <CustomSelect options={locationOptions} placeholder="Выберите место" value={location} onChange={setLocation} />
               </Field>
 
-              <button type="button" className="text-left text-sm text-blue-900 hover:text-blue-600 hover:underline cursor-pointer w-fit transition-colors" >
+              <button type="button" className="text-left text-sm text-blue-900 hover:text-blue-600 hover:underline cursor-pointer w-fit transition-colors">
                 Выбрать места на карте
               </button>
 
@@ -86,4 +83,4 @@ const BookingSection = () => {
   );
 }
 
-export default BookingSection
+export default BookingSection;

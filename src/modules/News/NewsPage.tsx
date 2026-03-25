@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { GalleryCard, HeroHeader, Leaf, NewsCard, Pagination } from "@/components";
+import { GalleryCard, HeroHeader, Leaf, NewsCard, Pagination, WherePath } from "@/components";
 import { GalleryItem, NewsItem } from "@/@types";
 
 const newsText = "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.";
@@ -44,15 +44,7 @@ const NewsPage = () => {
 
                     <div className="px-12 pt-6 pb-24">
 
-                        <p className="text-sm text-black/50 font-medium mb-10 tracking-wide">
-                            <Link href="/" className="hover:text-red-600 transition-colors duration-200">Главная</Link>
-                            <span className="mx-2 text-black/40">›</span>
-                            <span className="text-black/80">Новости</span>
-                        </p>
-
-                        <h1 className="text-center font-black text-black mb-12" style={{ fontSize: "48px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1 }}>
-                            Новости
-                        </h1>
+                        <WherePath pageName="Новости" pageHref="/news" title="Новости" />
 
                         <div className="grid grid-cols-3 gap-x-8 gap-y-24 mt-16">
                             {currentNews.map((item) => (<NewsCard key={item.id} item={item} />))}

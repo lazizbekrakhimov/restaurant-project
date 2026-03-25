@@ -26,7 +26,7 @@ const NewsSection = () => {
     return (
         <section className="py-10">
             <div className="containers">
-                <h2 className="text-4xl font-black text-black text-center mb-16">
+                <h2 className="text-4xl font-black text-black text-center mb-18" style={{ fontSize: "48px", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1 }}>
                     Новости/Галерея
                 </h2>
                 <div className="grid grid-cols-3 gap-30 items-start">

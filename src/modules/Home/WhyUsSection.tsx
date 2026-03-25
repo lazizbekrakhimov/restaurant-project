@@ -97,7 +97,7 @@ const WhyUsSection = () => {
     return (
         <section className="py-10">
             <div className="containers">
-                <h2 className="text-4xl font-black text-black text-center mb-16">
+                <h2 className="font-black text-black text-center mb-16" style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1 }}>
                     Почему именно мы?
                 </h2>
                 <div className="grid grid-cols-3 gap-x-16 gap-y-14 items-center">
