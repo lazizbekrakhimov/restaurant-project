@@ -1,7 +1,6 @@
 "use client";
 
-import { Contact, HeroHeader, Leaf, SubmitButton, WriteToUs } from "@/components";
-import WherePath from "@/components/WherePath";
+import { Contact, HeroHeader, Leaf, WherePath, WriteToUs } from "@/components";
 
 const ContactPage = () => {
     return (

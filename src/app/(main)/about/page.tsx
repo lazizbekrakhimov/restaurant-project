@@ -1,8 +1,11 @@
-import AboutSection from '@/modules/About/AboutSection'
+import { AboutSection, NewsSection } from '@/modules'
 
 const About = () => {
   return (
-    <AboutSection/>
+    <>
+      <AboutSection />
+      <NewsSection />
+    </>
   )
 }
 

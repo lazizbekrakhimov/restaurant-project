@@ -9,7 +9,7 @@ interface WherePathProps {
 const WherePath = ({ pageName, pageHref, title }: WherePathProps) => {
     return (
         <div className="pb-10">
-            <p className="text-sm text-black/50 font-medium mb-10 tracking-wide">
+            <p className="text-[16px] text-black/50 font-medium mb-10 tracking-wide">
                 <Link href="/" className="hover:text-red-600 transition-colors duration-200">
                     Главная
                 </Link>

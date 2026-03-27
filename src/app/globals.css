@@ -4,6 +4,7 @@
   max-width: 1282px;
   width: 100%;
   margin: 40px auto;
+  padding: 0 10px;
 }
 
 ::-webkit-scrollbar {

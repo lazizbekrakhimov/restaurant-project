@@ -42,10 +42,10 @@ const PageLoader = () => {
                     ))}
                 </div>
 
-                <div className="absolute -top-16 -right-24 w-20 h-20 pointer-events-none select-none" style={{ animation: "leafSway 3s ease-in-out infinite" }}>
+                <div className="absolute -top-16 -right-54 w-35 h-50 pointer-events-none select-none" style={{ animation: "leafSway 3s ease-in-out infinite" }}>
                     <Image src="/images/leaf.png" alt="" fill className="object-contain" style={{ opacity: 0.7, transform: "rotate(-20deg)" }} />
                 </div>
-                <div className="absolute -bottom-14 -left-20 w-16 h-16 pointer-events-none select-none" style={{ animation: "leafSway 3s ease-in-out infinite", animationDelay: "1.5s" }}>
+                <div className="absolute -bottom-14 -left-50 w-35 h-50 pointer-events-none select-none" style={{ animation: "leafSway 3s ease-in-out infinite", animationDelay: "1.5s" }}>
                     <Image src="/images/leaf.png" alt="" fill className="object-contain" style={{ opacity: 0.6, transform: "rotate(30deg)" }} />
                 </div>
             </div>

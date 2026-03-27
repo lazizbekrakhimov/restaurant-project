@@ -17,5 +17,9 @@ import { CustomTimePicker } from "./CustomDatePicker";
 import Contact from "./Contact";
 import WherePath from "./WherePath";
 import WriteToUs from "./WriteToUs";
+import AboutBlock from "./AboutBlock";
+import TeamCard from "./TeamCard";
+import CartModal from "./CardModal";
+import WishlistModal from "./WishlistModal";
 
-export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader, WorkTimes, CustomBooking, CustomDatePicker, CustomTimePicker, Contact, WherePath, WriteToUs }
+export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader, WorkTimes, CustomBooking, CustomDatePicker, CustomTimePicker, Contact, WherePath, WriteToUs, AboutBlock, TeamCard, CartModal, WishlistModal }

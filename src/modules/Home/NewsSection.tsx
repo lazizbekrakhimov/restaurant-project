@@ -1,28 +1,21 @@
 import { NewsItem } from "@/@types";
 import { MenuButton, NewsCard } from "@/components";
+import { getNews } from "@/service";
 
-const newsItems: NewsItem[] = [
-    {
-        id: 1,
-        image: "/images/news1.svg",
-        text: "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-        author: { name: "Сергей", avatar: "/images/avatar1.svg" },
-    },
-    {
-        id: 2,
-        image: "/images/news2.svg",
-        text: "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-        author: { name: "Сергей", avatar: "/images/avatar1.svg" },
-    },
-    {
-        id: 3,
-        image: "/images/news3.svg",
-        text: "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-        author: { name: "Сергей", avatar: "/images/avatar1.svg" },
-    },
-];
+const NewsSection = async () => {
+    let newsItems: NewsItem[] = [];
+    try {
+        const data = await getNews();
+        newsItems = data.slice(0, 3).map((item: any) => ({
+            id: item.id,
+            image: item.image,
+            text: item.text,
+            author: { name: item.authorName, avatar: item.authorAvatar },
+        }));
+    } catch {
+        newsItems = [];
+    }
 
-const NewsSection = () => {
     return (
         <section className="py-10">
             <div className="containers">
@@ -40,6 +33,6 @@ const NewsSection = () => {
             </div>
         </section>
     );
-}
+};
 
 export default NewsSection;
