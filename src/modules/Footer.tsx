@@ -25,7 +25,7 @@ const footerLinks = {
 const Footer = () => {
     return (
         <footer className="relative py-10 overflow-hidden">
-            <Image src="/images/footer-bg.png" alt="" fill className="object-cover" />
+            <Image src="/images/footer-bg.png" alt="" fill className="object-cover select-none" />
             <div className="absolute inset-0 bg-white/40 backdrop-blur-mb" />
             <div className="relative z-10 containers grid grid-cols-4 gap-12">
                 <div className="flex flex-col gap-2">

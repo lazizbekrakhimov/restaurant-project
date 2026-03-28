@@ -80,7 +80,7 @@ const ProfilePage = () => {
                                         <p className="font-black text-black text-lg leading-tight">{user?.name}</p>
                                         <p className="text-black/40 text-xs mt-1 break-all">{user?.email}</p>
                                     </div>
-                                    {user?.role === "ADMIN" && (
+                                    {user?.role === "SUPERADMIN" && (
                                         <span className="px-3 py-1 bg-black text-white text-xs font-semibold rounded-full">
                                             Администратор
                                         </span>
@@ -120,7 +120,7 @@ const ProfilePage = () => {
                                 </div>
 
                                 <div className="flex flex-col gap-3">
-                                    {user?.role === "ADMIN" && (
+                                    {user?.role === "SUPERADMIN" && (
                                         <Link href="/admin" className="w-full text-center bg-black text-white py-3 rounded-2xl font-semibold text-sm hover:bg-black/80 transition">
                                             Панель администратора
                                         </Link>
@@ -143,7 +143,7 @@ const ProfilePage = () => {
                                                     { label: "Имя", value: user?.name },
                                                     { label: "Email", value: user?.email },
                                                     { label: "Телефон", value: user?.phone || "—" },
-                                                    { label: "Роль", value: user?.role === "ADMIN" ? "Администратор" : "Пользователь" },
+                                                    { label: "Роль", value: user?.role === "SUPERADMIN" ? "Администратор" : "Пользователь" },
                                                     { label: "Дата регистрации", value: user?.createdAt ? new Date(user.createdAt).toLocaleDateString("ru-RU") : "—" },
                                                     { label: "ID", value: `#${user?.id}` },
                                                 ].map((field) => (

@@ -21,7 +21,7 @@ export default function LoginPage() {
     setError("");
     try {
       const res = await login(email, password);
-      if (res.user?.role === "ADMIN") {
+      if (res.user?.role === "SUPERADMIN") {
         router.push("/admin");
       } else {
         router.push("/");

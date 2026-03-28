@@ -90,7 +90,7 @@ const BookingSection = () => {
 
                         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                             <Field>
-                                <input type="email" placeholder="Ваш email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent text-sm text-black placeholder:text-black/40 outline-none" />
+                                <input type="email" placeholder="Ваш " value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent text-sm text-black placeholder:text-black/40 outline-none" />
                             </Field>
                             <Field>
                                 <CustomSelect options={guestOptions} placeholder="На сколько человек?" value={guests} onChange={setGuests} />

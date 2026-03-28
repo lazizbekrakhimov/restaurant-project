@@ -34,12 +34,13 @@ export interface GalleryItem {
 export type User = {
     id: number;
     email: string;
-    role: "ADMIN" | "USER";
+    role: "SUPERADMIN" | "USER";
     name?: string;
     phone?: string;
 };
 
 export type AuthResponse = {
+    role: string;
     user: User;
 };
 

@@ -57,7 +57,7 @@ const Header = () => {
 
                         <div onMouseLeave={() => setShowDropdown(false)}
                             className={`absolute right-0 top-full mt-1 w-40 bg-white/90 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden transition-all duration-200 z-50 ${showDropdown ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}>
-                            {user.role === "ADMIN" && (
+                            {user.role === "SUPERADMIN" && (
                                 <Link href="/admin" onClick={() => setShowDropdown(false)} className="block px-4 py-3 text-xs font-semibold hover:bg-black hover:text-white transition-colors">
                                     Панель админа
                                 </Link>
