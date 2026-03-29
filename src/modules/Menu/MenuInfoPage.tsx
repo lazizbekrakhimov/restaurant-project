@@ -12,17 +12,6 @@ import { NextIcon, PrevIcon } from "@/icons";
 import { addItem, openCart } from "@/redux/cartSlice";
 import { useAppDispatch } from "@/redux/hook";
 
-const FALLBACK_MEAL = {
-    id: 1, name: "Chicken soup",
-    description: "Эти двусторонние шелковые брюки с запахом икат сочетают в себе универсальность двух потрясающих рисунков ткани.",
-    price: 10.00, image: "/images/meal1.svg", category: { name: "Первые" },
-};
-
-const FALLBACK_SIMILAR: Meal[] = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 2, name: "Chicken soup", description: "Spicy with garlic",
-    price: 10.00 + i, image: `/images/meal${(i % 3) + 1}.svg`,
-}));
-
 const Stars = ({ rating = 4 }: { rating?: number }) => (
     <div className="flex items-center gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
@@ -40,16 +29,19 @@ const MenuInfoPage = () => {
     const id = params?.id as string;
     const dispatch = useAppDispatch();
 
-    const [meal, setMeal] = useState<any>(FALLBACK_MEAL);
-    const [similar, setSimilar] = useState<Meal[]>(FALLBACK_SIMILAR);
+    const [meal, setMeal] = useState<any>(null);
+    const [similar, setSimilar] = useState<Meal[]>([]);
     const [count, setCount] = useState(1);
     const [sliderStart, setSliderStart] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3999"}/menu/${id}`, { credentials: "include" })
             .then((r) => r.json())
             .then((data) => { if (data?.id) setMeal(data); })
-            .catch(() => { });
+            .catch(() => { })
+            .finally(() => setLoading(false));
 
         getMenu()
             .then((data) => {
@@ -58,8 +50,11 @@ const MenuInfoPage = () => {
                     .filter((item: any) => String(item.id) !== String(id))
                     .slice(0, 8)
                     .map((item: any) => ({
-                        id: item.id, name: item.name, description: item.description || "",
-                        price: Number(item.price), image: item.image || "/images/meal1.svg",
+                        id: item.id,
+                        name: item.name,
+                        description: item.description || "",
+                        price: Number(item.price),
+                        image: item.image || "/images/meal1.svg",
                     }))
                 );
             })
@@ -67,6 +62,7 @@ const MenuInfoPage = () => {
     }, [id]);
 
     const handleAddToCart = () => {
+        if (!meal) return;
         for (let i = 0; i < count; i++) {
             dispatch(addItem({
                 id: meal.id,
@@ -78,9 +74,39 @@ const MenuInfoPage = () => {
         dispatch(openCart());
     };
 
-    const price = parseFloat(String(meal.price));
     const canPrev = sliderStart > 0;
     const canNext = sliderStart + VISIBLE < similar.length;
+
+    if (loading) return (
+        <div className="relative z-10 flex flex-col pt-5 pb-24">
+            <div className="containers relative w-full">
+                <div className="relative w-full overflow-hidden flex flex-col" style={{ backdropFilter: "blur(14px)", background: "rgba(255,255,255,0.32)", borderRadius: "32px" }}>
+                    <HeroHeader />
+                    <div className="flex items-center justify-center py-40">
+                        <div className="w-10 h-10 rounded-full border-4 border-black/10 border-t-black animate-spin" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    if (!meal) return (
+        <div className="relative z-10 flex flex-col pt-5 pb-24">
+            <div className="containers relative w-full">
+                <div className="relative w-full overflow-hidden flex flex-col" style={{ backdropFilter: "blur(14px)", background: "rgba(255,255,255,0.32)", borderRadius: "32px" }}>
+                    <HeroHeader />
+                    <div className="flex flex-col items-center justify-center py-40 gap-4">
+                        <p className="text-black/40 text-lg">Блюдо не найдено</p>
+                        <Link href="/menu" className="px-6 py-3 bg-black text-white rounded-2xl text-sm font-semibold hover:bg-black/80 transition">
+                            Вернуться в меню
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    const price = parseFloat(String(meal.price));
 
     return (
         <div className="relative z-10 flex flex-col pt-5 pb-24">
@@ -107,7 +133,7 @@ const MenuInfoPage = () => {
 
                         <div className="flex items-center gap-12">
                             <div className="relative w-150 h-150 shrink-0 rounded-3xl overflow-hidden">
-                                <Image src={meal.image || "/images/meal1.svg"} alt={meal.name} fill className="object-contain drop-shadow-2xl p-6" />
+                                <Image src={meal.image || "/images/meal1.svg"} alt={meal.name} fill className="object-contain drop-shadow-2xl p-6" unoptimized />
                             </div>
                             <div className="flex-1">
                                 <h2 className="font-black text-black mb-4" style={{ fontSize: "40px", letterSpacing: "-0.02em" }}>
@@ -135,24 +161,26 @@ const MenuInfoPage = () => {
                 </div>
             </div>
 
-            <div className="containers relative w-full mt-10">
-                <h2 className="font-black text-black mb-20" style={{ fontSize: "32px", letterSpacing: "-0.02em" }}>
-                    Похожие:
-                </h2>
-                <div className="flex items-center gap-4">
-                    <button onClick={() => setSliderStart(i => i - 1)} disabled={!canPrev} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
-                        <PrevIcon />
-                    </button>
-                    <div className="flex-1 grid grid-cols-4 gap-6 pt-14 items-start">
-                        {similar.slice(sliderStart, sliderStart + VISIBLE).map((item) => (
-                            <MealCard key={item.id} meal={item} />
-                        ))}
+            {similar.length > 0 && (
+                <div className="containers relative w-full mt-10">
+                    <h2 className="font-black text-black mb-20" style={{ fontSize: "32px", letterSpacing: "-0.02em" }}>
+                        Похожие:
+                    </h2>
+                    <div className="flex items-center gap-4">
+                        <button onClick={() => setSliderStart(i => i - 1)} disabled={!canPrev} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
+                            <PrevIcon />
+                        </button>
+                        <div className="flex-1 grid grid-cols-4 gap-6 pt-14 items-start">
+                            {similar.slice(sliderStart, sliderStart + VISIBLE).map((item) => (
+                                <MealCard key={item.id} meal={item} />
+                            ))}
+                        </div>
+                        <button onClick={() => setSliderStart(i => i + 1)} disabled={!canNext} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
+                            <NextIcon />
+                        </button>
                     </div>
-                    <button onClick={() => setSliderStart(i => i + 1)} disabled={!canNext} className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
-                        <NextIcon />
-                    </button>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

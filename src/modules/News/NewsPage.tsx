@@ -3,37 +3,46 @@
 import { useEffect, useState } from "react";
 import { GalleryCard, HeroHeader, Leaf, NewsCard, Pagination, WherePath } from "@/components";
 import { GalleryItem, NewsItem } from "@/@types";
-import { getNews } from "@/service";
-
-const GALLERY_IMAGES: GalleryItem[] = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 1,
-    image: `/images/image${i + 1}.png`,
-}));
+import { getGallery, getNews } from "@/service";
 
 const NEWS_PER_PAGE = 6;
 const GALLERY_PER_PAGE = 8;
 
 const NewsPage = () => {
     const [allNews, setAllNews] = useState<NewsItem[]>([]);
+    const [allGallery, setAllGallery] = useState<GalleryItem[]>([]);
     const [newsPage, setNewsPage] = useState(1);
     const [galleryPage, setGalleryPage] = useState(1);
 
     useEffect(() => {
-        getNews().then((data) => {
-            setAllNews(data.map((item: any) => ({
-                id: item.id,
-                image: item.image || '/images/news1.svg',
-                text: item.text,
-                author: { name: item.authorName, avatar: item.authorAvatar || '/images/avatar1.svg' },
-            })));
-        }).catch(() => setAllNews([]));
+        getNews()
+            .then((data) => {
+                setAllNews(data.map((item: any) => ({
+                    id: item.id,
+                    image: item.image || '/images/news1.svg',
+                    text: item.text,
+                    author: {
+                        name: item.authorName,
+                        avatar: item.authorAvatar || '/images/avatar1.svg',
+                    },
+                })));
+            })
+            .catch(() => setAllNews([]));
+
+        getGallery()
+            .then((data) => {
+                setAllGallery(data.map((item: any) => ({
+                    id: item.id,
+                    image: item.image || '/images/news1.svg',
+                })));
+            })
+            .catch(() => setAllGallery([]));
     }, []);
 
     const totalNewsPages = Math.max(1, Math.ceil(allNews.length / NEWS_PER_PAGE));
-    const totalGalleryPages = Math.max(1, Math.ceil(GALLERY_IMAGES.length / GALLERY_PER_PAGE));
-
+    const totalGalleryPages = Math.max(1, Math.ceil(allGallery.length / GALLERY_PER_PAGE));
     const currentNews = allNews.slice((newsPage - 1) * NEWS_PER_PAGE, newsPage * NEWS_PER_PAGE);
-    const currentGallery = GALLERY_IMAGES.slice((galleryPage - 1) * GALLERY_PER_PAGE, galleryPage * GALLERY_PER_PAGE);
+    const currentGallery = allGallery.slice((galleryPage - 1) * GALLERY_PER_PAGE, galleryPage * GALLERY_PER_PAGE);
 
     return (
         <div className="relative z-10 flex flex-col pt-5 pb-24">
@@ -52,17 +61,25 @@ const NewsPage = () => {
                             {currentNews.map((item) => (<NewsCard key={item.id} item={item} />))}
                         </div>
 
-                        <Pagination current={newsPage} total={totalNewsPages} onChange={setNewsPage} />
+                        {allNews.length > NEWS_PER_PAGE && (
+                            <Pagination current={newsPage} total={totalNewsPages} onChange={setNewsPage} />
+                        )}
 
                         <h2 className="text-center font-black text-black my-24" style={{ fontSize: "48px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1 }}>
                             Галерея
                         </h2>
 
-                        <div className="grid grid-cols-4 gap-7 gap-y-12">
-                            {currentGallery.map((item) => (<GalleryCard key={item.id} item={item} />))}
-                        </div>
+                        {currentGallery.length > 0 ? (
+                            <div className="grid grid-cols-4 gap-7 gap-y-12">
+                                {currentGallery.map((item) => (<GalleryCard key={item.id} item={item} />))}
+                            </div>
+                        ) : (
+                            <p className="text-center text-black/30 py-16">Галерея пуста</p>
+                        )}
 
-                        <Pagination current={galleryPage} total={totalGalleryPages} onChange={setGalleryPage} />
+                        {allGallery.length > GALLERY_PER_PAGE && (
+                            <Pagination current={galleryPage} total={totalGalleryPages} onChange={setGalleryPage} />
+                        )}
                     </div>
                 </div>
             </div>

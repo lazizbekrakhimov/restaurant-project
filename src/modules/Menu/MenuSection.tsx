@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { HeroHeader, Leaf, WherePath } from '@/components';
 import MealCard from "@/components/MealCard";
 import { Meal } from "@/@types";
@@ -24,10 +23,11 @@ const FALLBACK_CATEGORIES = [
 ];
 
 const MenuSection = () => {
-    const [meals, setMeals] = useState<Meal[]>(FALLBACK_MEALS);
+    const [meals, setMeals] = useState<Meal[]>([]);
     const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
     const [activeCategory, setActiveCategory] = useState<number | undefined>(undefined);
     const [activeName, setActiveName] = useState("Все");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getCategories()
@@ -36,18 +36,22 @@ const MenuSection = () => {
     }, []);
 
     useEffect(() => {
+        setLoading(true);
         getMenu(activeCategory)
             .then((data) => {
-                if (!data?.length) { setMeals(FALLBACK_MEALS); return; }
-                setMeals(data.map((item: any) => ({
-                    id: item.id,
-                    name: item.name,
-                    description: item.description || '',
-                    price: Number(item.price),
-                    image: item.image || '/images/meal2.svg',
-                })));
+                setMeals(data?.length
+                    ? data.map((item: any) => ({
+                        id: item.id,
+                        name: item.name,
+                        description: item.description || '',
+                        price: Number(item.price),
+                        image: item.image || '/images/meal2.svg',
+                    }))
+                    : FALLBACK_MEALS
+                );
             })
-            .catch(() => setMeals(FALLBACK_MEALS));
+            .catch(() => setMeals(FALLBACK_MEALS))
+            .finally(() => setLoading(false));
     }, [activeCategory]);
 
     const allCategories = [{ id: 0, name: "Все" }, ...categories];
@@ -68,18 +72,25 @@ const MenuSection = () => {
                         <div className="flex justify-center mb-35">
                             <div className="inline-flex items-center rounded-full px-2 py-2 gap-1" style={{ background: "rgba(255,255,255,0.45)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
                                 {allCategories.map((cat) => (
-                                    <button key={cat.id} onClick={() => { setActiveCategory(cat.id === 0 ? undefined : cat.id); setActiveName(cat.name); }} className={`px-7 py-1.5 text-sm font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap ${activeName === cat.name ? "bg-white text-black" : "text-black/70 hover:text-black hover:bg-white/50"}`}>
+                                    <button key={cat.id} onClick={() => { setActiveCategory(cat.id === 0 ? undefined : cat.id); setActiveName(cat.name); }}
+                                        className={`px-7 py-1.5 text-sm font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap ${activeName === cat.name ? "bg-white text-black" : "text-black/70 hover:text-black hover:bg-white/50"}`}>
                                         {cat.name}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-4 gap-x-6 gap-y-30">
-                            {meals.map((meal) => (
-                                <MealCard key={meal.id} meal={meal} />
-                            ))}
-                        </div>
+                        {loading ? (
+                            <div className="flex items-center justify-center py-24">
+                                <div className="w-10 h-10 rounded-full border-4 border-black/10 border-t-black animate-spin" />
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-4 gap-x-6 gap-y-30">
+                                {meals.map((meal) => (
+                                    <MealCard key={meal.id} meal={meal} />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

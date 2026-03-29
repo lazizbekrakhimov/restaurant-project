@@ -40,7 +40,7 @@ export default function AdminGalleryPage() {
       </div>
       <div className="grid grid-cols-4 gap-4">
         {items.map((item) => (
-          <div key={item.id} className="group relative aspect-square rounded-3xl overflow-hidden" style={{ background: "rgba(0,0,0,0.06)", border: "1px solid rgba(255,255,255,0.7)" }}>
+          <div key={item.id} className="group relative aspect-square rounded-3xl overflow-hidden" style={{ background: "rgba(0,0,0,0.06)" }}>
             {item.image && <Image src={item.image} alt={item.title || ""} fill className="object-cover" unoptimized />}
             {item.title && <div className="absolute bottom-0 left-0 right-0 px-3 py-2" style={{ background: "linear-gradient(transparent,rgba(0,0,0,0.6))" }}><p className="text-white text-xs font-semibold truncate">{item.title}</p></div>}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition" style={{ background: "rgba(0,0,0,0.4)" }}>
