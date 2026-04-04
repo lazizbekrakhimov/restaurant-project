@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Save, Trash2 } from "lucide-react";
 import { deleteMenuItem, getCategories } from "@/service";
-import AdminInput from "@/components/admin/AdminInput";
-import AdminSelect from "@/components/admin/AdminSelect";
-import ImageUpload from "@/components/admin/ImageUpload";
+import { AdminInput, AdminSelect, ImageUpload } from "@/components";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 

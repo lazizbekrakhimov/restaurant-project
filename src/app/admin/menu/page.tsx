@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus, Trash2, Search, Eye } from "lucide-react";
 import { getMenu, getCategories, createMenuItem, deleteMenuItem } from "@/service";
-import AdminTable from "@/components/admin/AdminTable";
-import AdminModal from "@/components/admin/AdminModal";
-import AdminInput from "@/components/admin/AdminInput";
-import AdminSelect from "@/components/admin/AdminSelect";
-import ImageUpload from "@/components/admin/ImageUpload";
+import { AdminInput, AdminModal, AdminSelect, AdminTable, ImageUpload } from "@/components";
 
 const EMPTY = { name: "", description: "", price: "", categoryId: "", image: "", isAvailable: "true" };
 

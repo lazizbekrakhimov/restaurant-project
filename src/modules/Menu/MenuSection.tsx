@@ -11,15 +11,11 @@ const FALLBACK_MEALS: Meal[] = Array.from({ length: 12 }, (_, i) => ({
     name: "Chicken soup",
     description: "Spicy with garlic",
     price: 10.00 + i,
-    image: `/images/meal${(i % 3) + 1}.svg`,
+    image: `/images/meal1.svg`,
 }));
 
 const FALLBACK_CATEGORIES = [
-    { id: 1, name: "Первые" },
-    { id: 2, name: "Вторые" },
-    { id: 3, name: "Салаты" },
-    { id: 4, name: "Напитки" },
-    { id: 5, name: "Фаст-Фуд" },
+    { id: 1, name: "Первые" }
 ];
 
 const MenuSection = () => {
@@ -45,7 +41,7 @@ const MenuSection = () => {
                         name: item.name,
                         description: item.description || '',
                         price: Number(item.price),
-                        image: item.image || '/images/meal2.svg',
+                        image: item.image || '/images/meal1.svg',
                     }))
                     : FALLBACK_MEALS
                 );

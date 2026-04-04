@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Search, Trash2, Shield } from "lucide-react";
 import { getUsers, deleteUser } from "@/service";
-import AdminTable from "@/components/admin/AdminTable";
+import { AdminTable } from "@/components";
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<any[]>([]);

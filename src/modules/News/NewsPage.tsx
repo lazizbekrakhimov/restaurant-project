@@ -19,11 +19,11 @@ const NewsPage = () => {
             .then((data) => {
                 setAllNews(data.map((item: any) => ({
                     id: item.id,
-                    image: item.image || '/images/news1.svg',
+                    image: item.image,
                     text: item.text,
                     author: {
                         name: item.authorName,
-                        avatar: item.authorAvatar || '/images/avatar1.svg',
+                        avatar: item.authorAvatar,
                     },
                 })));
             })
@@ -33,7 +33,7 @@ const NewsPage = () => {
             .then((data) => {
                 setAllGallery(data.map((item: any) => ({
                     id: item.id,
-                    image: item.image || '/images/news1.svg',
+                    image: item.image,
                 })));
             })
             .catch(() => setAllGallery([]));

@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ImageOff, Plus, Trash2 } from "lucide-react";
 import { getGallery, createGallery, deleteGallery } from "@/service";
-import AdminModal from "@/components/admin/AdminModal";
-import AdminInput from "@/components/admin/AdminInput";
-import ImageUpload from "@/components/admin/ImageUpload";
+import { AdminInput, AdminModal, ImageUpload } from "@/components";
 
 const EMPTY = { image: "", title: "" };
 

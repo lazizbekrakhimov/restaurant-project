@@ -21,5 +21,10 @@ import AboutBlock from "./AboutBlock";
 import TeamCard from "./TeamCard";
 import CartModal from "./CardModal";
 import WishlistModal from "./WishlistModal";
+import AdminInput from "./admin/AdminInput";
+import AdminModal from "./admin/AdminModal";
+import AdminSelect from "./admin/AdminSelect";
+import AdminTable from "./admin/AdminTable";
+import ImageUpload from "./admin/ImageUpload";
 
-export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader, WorkTimes, CustomBooking, CustomDatePicker, CustomTimePicker, Contact, WherePath, WriteToUs, AboutBlock, TeamCard, CartModal, WishlistModal }
+export { HeroHeader, MenuButton, MealCard, LanguageSelect, CustomSelect, NewsCard, Leaf, AuthInput, SubmitButton, GalleryCard, Pagination, PageLoader, WorkTimes, CustomBooking, CustomDatePicker, CustomTimePicker, Contact, WherePath, WriteToUs, AboutBlock, TeamCard, CartModal, WishlistModal, AdminInput, AdminModal, AdminSelect, AdminTable, ImageUpload }

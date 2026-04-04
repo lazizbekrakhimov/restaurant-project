@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { Search, Clock } from "lucide-react";
 import { getReservations, updateReservation } from "@/service";
-import AdminTable from "@/components/admin/AdminTable";
-import AdminSelect from "@/components/admin/AdminSelect";
+import { AdminSelect, AdminTable } from "@/components";
 
 const statusColor: Record<string, string> = { PENDING: "#d97706", CONFIRMED: "#16a34a", CANCELLED: "#dc2626" };
 const statusLabel: Record<string, string> = { PENDING: "Ожидает", CONFIRMED: "Подтверждён", CANCELLED: "Отменён" };

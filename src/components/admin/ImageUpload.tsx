@@ -38,7 +38,6 @@ export default function ImageUpload({ value, onChange, folder }: ImageUploadProp
     <div>
       <label className="text-black/50 text-xs font-semibold mb-1.5 block">Изображение</label>
 
-      {/* Toggle */}
       <div className="flex gap-2 mb-3">
         {(["file", "url"] as const).map(m => (
           <button key={m} type="button" onClick={() => setMode(m)}
@@ -58,7 +57,7 @@ export default function ImageUpload({ value, onChange, folder }: ImageUploadProp
             {uploading ? "Загрузка..." : "Выбрать файл"}
           </button>
           <input ref={fileRef} type="file" accept="image/*,.svg" onChange={handleFile} className="hidden" />
-          <p className="text-black/30 text-xs">PNG, JPG, SVG до 5MB</p>
+          <p className="text-black/30 text-xs">PNG, JPG, SVG до 20MB</p>
         </div>
       ) : (
         <div className="flex gap-2">

@@ -1,16 +1,34 @@
 import { NewsItem } from "@/@types";
 import { MenuButton, NewsCard } from "@/components";
-import { getNews } from "@/service";
+
+export const dynamic = 'force-dynamic';
+
+const getNewsWithTimeout = async (): Promise<any[]> => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3999'}/news`, {
+            signal: controller.signal,
+            cache: 'no-store',
+        });
+        clearTimeout(timeout);
+        if (!res.ok) return [];
+        return res.json();
+    } catch {
+        clearTimeout(timeout);
+        return [];
+    }
+};
 
 const NewsSection = async () => {
     let newsItems: NewsItem[] = [];
     try {
-        const data = await getNews();
+        const data = await getNewsWithTimeout();
         newsItems = data.slice(0, 3).map((item: any) => ({
             id: item.id,
             image: item.image,
             text: item.text,
-            author: { name: item.authorName, avatar: item.authorAvatar },
+            author: { name: item.authorName, avatar: item.authorAvatar, },
         }));
     } catch {
         newsItems = [];

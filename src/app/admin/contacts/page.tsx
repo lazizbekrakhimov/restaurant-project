@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Search, CheckCheck, X } from "lucide-react";
 import { getContacts, markContactRead } from "@/service";
-import AdminModal from "@/components/admin/AdminModal";
+import { AdminModal } from "@/components";
 
 export default function AdminContactsPage() {
   const [contacts, setContacts] = useState<any[]>([]);
